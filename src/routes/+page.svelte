@@ -1,59 +1,86 @@
 <script lang="ts">
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcomeFallback from '$lib/images/svelte-welcome.png';
+  let searchQueryString: string = $state("");
+  let searchQueryYear: number | null = $state(null);
+  type SearchResult = {
+    query: string;
+    year: number | null;
+    category: string | null;
+  };
+  let searchResults: SearchResult[] = $state([]);
+  let searchResultStrings: string[] = $derived(
+    searchResults.map((result) => searchResultAsString(result))
+  );
+
+  const sendQueryToDB = () => {
+    searchResults.push({
+      query: searchQueryString,
+      year: searchQueryYear,
+      category: null,
+    });
+    searchQueryString = "";
+  };
+
+  const searchResultAsString = (result: SearchResult) => {
+    return `Query: ${result.query}, Year: ${result.year}, Category: ${result.category}`;
+  };
 </script>
 
-<svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
-</svelte:head>
-
 <section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcomeFallback} alt="Welcome" />
-			</picture>
-		</span>
+  <form class="search-form" onsubmit={sendQueryToDB}>
+    <div class="search-input">
+      <input
+        type="text"
+        placeholder="문제 검색"
+        bind:value={searchQueryString}
+      />
+      <button type="submit">검색</button>
+    </div>
+    <div class="search-options">
+      <label>
+        <span>출제년도</span>
+        <input
+          type="number"
+          min="2000"
+          max="2023"
+          bind:value={searchQueryYear}
+        />
+      </label>
+      <label>
+        <span>구분</span>
+        <input type="text" placeholder="ex) 수학1" />
+      </label>
+    </div>
+  </form>
 
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
-	<Counter />
+  {#each searchResultStrings.entries() as [idx, searchResult]}
+    <div class="search-result">
+      <p>[{idx + 1}] {searchResult}</p>
+    </div>
+  {/each}
 </section>
 
 <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
+  .search-form {
+    justify-content: center;
+    align-items: center;
+  }
 
-	h1 {
-		width: 100%;
-	}
+  .search-form div {
+    margin-bottom: 1rem;
+  }
 
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
+  .search-form .search-input {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
 
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
+  .search-form .search-input input {
+    width: 80%;
+    height: 1.5rem;
+  }
+
+  .search-form .search-options {
+    display: inline-block;
+  }
 </style>
