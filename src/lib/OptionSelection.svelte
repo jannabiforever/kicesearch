@@ -1,15 +1,15 @@
 <script lang="ts">
-    import { CATEGORIES, ALLOWED_YEARS } from "$lib/search";
+    import { CATEGORIES, yearToString, YEARS } from "$lib/problem";
 </script>
 
 <div class="search-options">
     <div class="year-options">
         <p>출제년도</p>
         <ul>
-            {#each ALLOWED_YEARS.values() as year}
+            {#each YEARS as year}
                 <li>
                     <input type="checkbox" />
-                    <lable for="year">{year}</lable>
+                    <lable for="year">{yearToString(year)}</lable>
                 </li>
             {/each}
         </ul>
