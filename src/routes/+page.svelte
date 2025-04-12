@@ -1,50 +1,70 @@
 <script lang="ts">
-    import OptionSelection from "$lib/OptionSelection.svelte";
-    import { SearchQuery } from "$lib/query";
-    import SearchResultDiv from "$lib/SearchResultDiv.svelte";
-
-    let queryBody: string = $state("");
-    let searchResults = $state([]);
-
-    let yearOptions = $state([]);
-    let categoryOptions = $state([]);
-    let pointOptions = $state([]);
-
-    const sendQuery = async () => {
-        let query: SearchQuery = new SearchQuery(
-            queryBody,
-            yearOptions,
-            categoryOptions,
-            pointOptions
-        );
-
-        console.log(query);
-        clearQuery();
-    };
-
-    const clearQuery = () => {
-        queryBody = "";
-        yearOptions = [];
-        categoryOptions = [];
-        pointOptions = [];
-    };
+    import { CATEGORIES, POINTS, YEARS, yearToString } from "$lib/problem";
+    import { page } from "$app/state";
 </script>
 
 <section>
-    <form class="search-form" onsubmit={sendQuery}>
+    <form class="search-form">
         <div class="search-input">
-            <input type="text" placeholder="문제 검색" bind:value={queryBody} />
-            <button type="submit">검색</button>
+            <input name="query" placeholder="문제 검색" />
+            <button>검색</button>
+        </div>
+        <div class="search-options">
+            <div class="year-options">
+                <p>출제년도</p>
+                <ul class="year-options-labels">
+                    {#each YEARS as year}
+                        <li>
+                            <label>
+                                <input
+                                    name="year"
+                                    type="checkbox"
+                                    value={year}
+                                />
+                                {yearToString(year)}
+                            </label>
+                        </li>
+                    {/each}
+                </ul>
+            </div>
+            <div class="category-options">
+                <p>구분</p>
+                <ul class="category-options-labels">
+                    {#each CATEGORIES as category}
+                        <li>
+                            <label>
+                                <input
+                                    name="category"
+                                    type="checkbox"
+                                    value={category}
+                                />
+                                {category}
+                            </label>
+                        </li>
+                    {/each}
+                </ul>
+            </div>
+            <div class="point-options">
+                <p>배점</p>
+                <ul class="point-options-labels">
+                    {#each POINTS as point}
+                        <li>
+                            <label>
+                                <input
+                                    name="point"
+                                    type="checkbox"
+                                    value={point}
+                                />
+                                {point}
+                            </label>
+                        </li>
+                    {/each}
+                </ul>
+            </div>
         </div>
     </form>
 
-    <OptionSelection bind:yearOptions bind:categoryOptions bind:pointOptions />
-
-    {#each searchResults.entries() as [idx, searchResult]}
-        <div class="search-result">
-            <p>[{idx + 1}] <SearchResultDiv {searchResult} /></p>
-        </div>
-    {/each}
+    {page.data.result}
 </section>
 
 <style>
