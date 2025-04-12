@@ -1,28 +1,12 @@
-import type { Category, Point, Year } from "$lib/problem";
+// import type { Category, Point, Year } from "$lib/problem";
+import { MEILISEARCH_URL, MEILISEARCH_API_KEY } from "$env/static/private";
+import { MeiliSearch } from "meilisearch";
 
-export class SearchQuery {
-    query: string;
-    yearOptions: Year[];
-    categoryOptions: Category[];
-    pointOptions: Point[];
+const getMSClient = () => {
+    let client = new MeiliSearch({
+        host: MEILISEARCH_URL,
+        apiKey: MEILISEARCH_API_KEY,
+    });
 
-    constructor(
-        query: string,
-        yearOptions: Year[],
-        categoryOptions: Category[],
-        pointOptions: Point[]
-    ) {
-        this.query = query;
-        this.yearOptions = yearOptions;
-        this.categoryOptions = categoryOptions;
-        this.pointOptions = pointOptions;
-    }
-}
-
-export class SearchResult {
-    // TODO: add properties.
-}
-
-export const handleSearchRequest = async (searchQuery: SearchQuery) => {
-    return SearchResult;
+    return client.index("kice_problems");
 };

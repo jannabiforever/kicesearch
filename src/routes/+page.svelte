@@ -1,14 +1,10 @@
 <script lang="ts">
     import OptionSelection from "$lib/OptionSelection.svelte";
-    import {
-        SearchQuery,
-        SearchResult,
-        handleSearchRequest,
-    } from "$lib/search";
+    import { SearchQuery } from "$lib/query";
     import SearchResultDiv from "$lib/SearchResultDiv.svelte";
 
     let queryBody: string = $state("");
-    let searchResults: SearchResult[] = $state([]);
+    let searchResults = $state([]);
 
     let yearOptions = $state([]);
     let categoryOptions = $state([]);
@@ -22,12 +18,8 @@
             pointOptions
         );
 
-        console.log("query: ", query);
-
-        handleSearchRequest(query).then((response) => {
-            searchResults.push(response);
-            clearQuery();
-        });
+        console.log(query);
+        clearQuery();
     };
 
     const clearQuery = () => {

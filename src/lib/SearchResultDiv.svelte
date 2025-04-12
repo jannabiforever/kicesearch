@@ -1,7 +1,5 @@
 <script lang="ts">
-    import { SearchResult } from "$lib/search";
-    let props = $props();
-    let result: SearchResult = props.searchResult;
+    let result = $props();
 </script>
 
 <p>{result}</p>
