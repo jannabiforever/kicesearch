@@ -7,29 +7,46 @@
     } from "$lib/search";
     import SearchResultDiv from "$lib/SearchResultDiv.svelte";
 
-    let query_body: string = $state("");
+    let queryBody: string = $state("");
     let searchResults: SearchResult[] = $state([]);
 
-    const sendQueryToDB = async () => {
-        let query: SearchQuery = new SearchQuery(query_body);
-        let response: SearchResult = await handleSearchRequest(query);
-        searchResults.push(response);
-        query_body = "";
+    let yearOptions = $state([]);
+    let categoryOptions = $state([]);
+    let pointOptions = $state([]);
+
+    const sendQuery = async () => {
+        let query: SearchQuery = new SearchQuery(
+            queryBody,
+            yearOptions,
+            categoryOptions,
+            pointOptions
+        );
+
+        console.log("query: ", query);
+
+        handleSearchRequest(query).then((response) => {
+            searchResults.push(response);
+            clearQuery();
+        });
+    };
+
+    const clearQuery = () => {
+        queryBody = "";
+        yearOptions = [];
+        categoryOptions = [];
+        pointOptions = [];
     };
 </script>
 
 <section>
-    <form class="search-form" onsubmit={sendQueryToDB}>
+    <form class="search-form" onsubmit={sendQuery}>
         <div class="search-input">
-            <input
-                type="text"
-                placeholder="문제 검색"
-                bind:value={query_body}
-            />
+            <input type="text" placeholder="문제 검색" bind:value={queryBody} />
             <button type="submit">검색</button>
         </div>
-        <OptionSelection />
     </form>
+
+    <OptionSelection bind:yearOptions bind:categoryOptions bind:pointOptions />
 
     {#each searchResults.entries() as [idx, searchResult]}
         <div class="search-result">

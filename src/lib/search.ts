@@ -1,14 +1,21 @@
-import type { Category, Year } from "$lib/problem";
+import type { Category, Point, Year } from "$lib/problem";
 
 export class SearchQuery {
     query: string;
-    year_option: Year[];
-    category_option: Category[];
+    yearOptions: Year[];
+    categoryOptions: Category[];
+    pointOptions: Point[];
 
-    constructor(query: string) {
+    constructor(
+        query: string,
+        yearOptions: Year[],
+        categoryOptions: Category[],
+        pointOptions: Point[]
+    ) {
         this.query = query;
-        this.year_option = [];
-        this.category_option = [];
+        this.yearOptions = yearOptions;
+        this.categoryOptions = categoryOptions;
+        this.pointOptions = pointOptions;
     }
 }
 
