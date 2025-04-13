@@ -1,6 +1,7 @@
 <script lang="ts">
     import { CATEGORIES, POINTS, YEARS, yearToString } from "$lib/problem";
     import { page } from "$app/state";
+    import SearchResultDiv from "$lib/SearchResultDiv.svelte";
 </script>
 
 <section>
@@ -64,7 +65,7 @@
         </div>
     </form>
 
-    {page.data.result}
+    <SearchResultDiv result={page.data.result} />
 </section>
 
 <style>

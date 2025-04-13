@@ -2,4 +2,7 @@
     let result = $props();
 </script>
 
-<p>{result}</p>
+{#each result.result as hit}
+    <p>id: {hit.id}</p>
+    <p>body: {hit.body}</p>
+{/each}

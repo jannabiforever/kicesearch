@@ -8,7 +8,7 @@ const getMeiliSearchInstance = () => {
         apiKey: MEILISEARCH_API_KEY,
     });
 
-    return client.index("kice_problems");
+    return client.index("movies");
 };
 
 export const load: PageServerLoad = async ({ url }) => {
@@ -17,10 +17,16 @@ export const load: PageServerLoad = async ({ url }) => {
     const categories = url.searchParams.getAll("category");
     const points = url.searchParams.getAll("point");
 
-    let msInstance = getMeiliSearchInstance();
-    let result = await msInstance.search(query);
+    if (query !== null) {
+        let msInstance = getMeiliSearchInstance();
+        let result = await msInstance.search(query);
 
-    return {
-        result,
-    };
+        return {
+            result: result["hits"],
+        };
+    } else {
+        return {
+            result: [],
+        };
+    }
 };

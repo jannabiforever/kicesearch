@@ -4,7 +4,6 @@
         yearOptions = $bindable(),
         categoryOptions = $bindable(),
         pointOptions = $bindable(),
-        ...props
     } = $props();
 </script>
 

@@ -5,7 +5,7 @@
 <div class="app">
     <main>
         <header>
-            <h1>평가원 수학 문제 검색</h1>
+            <h1><a href="/">평가원 수학 문제 검색</a></h1>
         </header>
         {@render children()}
     </main>
