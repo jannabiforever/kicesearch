@@ -8,7 +8,7 @@ const getMeiliSearchInstance = () => {
         apiKey: MEILISEARCH_API_KEY,
     });
 
-    return client.index("movies");
+    return client.index("kice_problems");
 };
 
 export const load: PageServerLoad = async ({ url }) => {
