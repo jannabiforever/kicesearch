@@ -1,5 +1,5 @@
 import { MeiliSearch } from "meilisearch";
-import { MEILISEARCH_URL, MEILISEARCH_API_KEY } from "$env/static/private";
+import { MEILI_HTTP_ADDR, MEILI_MASTER_KEY } from "$env/static/private";
 import type { PageServerLoad } from "./$types";
 import {
     CATEGORIES,
@@ -10,12 +10,12 @@ import {
     type Year,
 } from "$lib/problem";
 
-import data from "../../pdf/2022_06.json";
+// import data from "../../pdf/2022_06.json";
 
 const getMeiliSearchInstance = async () => {
     let client = new MeiliSearch({
-        host: MEILISEARCH_URL,
-        apiKey: MEILISEARCH_API_KEY,
+        host: MEILI_HTTP_ADDR,
+        apiKey: MEILI_MASTER_KEY,
     });
 
     let instance = client.index("kice_problems");
