@@ -21,8 +21,8 @@ const getMeiliSearchInstance = async () => {
     let instance = client.index("kice_problems");
 
     // initialize.
-    await instance.updateFilterableAttributes(["point", "year", "category"]);
-    await instance.addDocuments(data);
+    // await instance.updateFilterableAttributes(["point", "year", "category"]);
+    // await instance.addDocuments(data);
 
     return instance;
 };
