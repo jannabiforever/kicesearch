@@ -1,14 +1,30 @@
 import { MeiliSearch } from "meilisearch";
 import { MEILISEARCH_URL, MEILISEARCH_API_KEY } from "$env/static/private";
 import type { PageServerLoad } from "./$types";
+import {
+    CATEGORIES,
+    POINTS,
+    YEARS,
+    type Category,
+    type Point,
+    type Year,
+} from "$lib/problem";
 
-const getMeiliSearchInstance = () => {
+import data from "../../pdf/2022_06.json";
+
+const getMeiliSearchInstance = async () => {
     let client = new MeiliSearch({
         host: MEILISEARCH_URL,
         apiKey: MEILISEARCH_API_KEY,
     });
 
-    return client.index("kice_problems");
+    let instance = client.index("kice_problems");
+
+    // initialize.
+    await instance.updateFilterableAttributes(["point", "year", "category"]);
+    await instance.addDocuments(data);
+
+    return instance;
 };
 
 export const load: PageServerLoad = async ({ url }) => {
@@ -18,11 +34,15 @@ export const load: PageServerLoad = async ({ url }) => {
     const points = url.searchParams.getAll("point");
 
     if (query !== null) {
-        let msInstance = getMeiliSearchInstance();
-        let result = await msInstance.search(query);
+        let msInstance = await getMeiliSearchInstance();
+        let filterString = buildMSFilterString(years, categories, points);
+
+        let result = await msInstance.search(query, {
+            filter: filterString,
+        });
 
         return {
-            result: result["hits"],
+            result: result.hits,
         };
     } else {
         return {
@@ -30,3 +50,50 @@ export const load: PageServerLoad = async ({ url }) => {
         };
     }
 };
+
+function validateYearString(year: string) {
+    if (!YEARS.includes(Number(year) as Year)) {
+        throw Error("Given query year=" + year + " is not valid!");
+    }
+}
+
+function validateCategoryString(category: string) {
+    if (!CATEGORIES.includes(category as Category)) {
+        throw Error("Given query category=" + category + " is not valid!");
+    }
+}
+
+function validatePointString(point: string) {
+    if (!POINTS.includes(point as Point)) {
+        throw Error("Given query point=" + point + " is not valid!");
+    }
+}
+
+function buildMSFilterString(
+    years: string[],
+    categories: string[],
+    points: string[]
+): string {
+    let yearFilter = years
+        .map((year) => {
+            validateYearString(year);
+            return "year = " + year;
+        })
+        .join(" OR ");
+    let categoryFilter = categories
+        .map((category) => {
+            validateCategoryString(category);
+            return "category = " + category;
+        })
+        .join("OR");
+    let pointFilter = points
+        .map((point) => {
+            validatePointString(point);
+            return "point = " + point;
+        })
+        .join("OR");
+
+    return [yearFilter, categoryFilter, pointFilter]
+        .filter(Boolean)
+        .join(" AND ");
+}

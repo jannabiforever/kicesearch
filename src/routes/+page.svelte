@@ -1,5 +1,10 @@
 <script lang="ts">
-    import { CATEGORIES, POINTS, YEARS, yearToString } from "$lib/problem";
+    import {
+        CATEGORIES,
+        POINTS,
+        YEARS,
+        displayYearMessage,
+    } from "$lib/problem";
     import { page } from "$app/state";
     import SearchResultDiv from "$lib/SearchResultDiv.svelte";
 </script>
@@ -22,7 +27,7 @@
                                     type="checkbox"
                                     value={year}
                                 />
-                                {yearToString(year)}
+                                {displayYearMessage(year)}
                             </label>
                         </li>
                     {/each}
