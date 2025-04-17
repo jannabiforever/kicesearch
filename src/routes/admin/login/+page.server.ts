@@ -1,4 +1,3 @@
-import { redirect } from "@sveltejs/kit";
 import type { Actions } from "../$types";
 
 export const actions = {
@@ -8,9 +7,11 @@ export const actions = {
         let username = data.get("username");
         let password = data.get("password");
 
-        console.log(`username: ${username}\npassword: ${password}`);
-
         if (!(username && password)) {
+            // unreachable!
+            console.log(
+                "username or password is not set, but it is not desirable."
+            );
             return { successful: false };
         }
 

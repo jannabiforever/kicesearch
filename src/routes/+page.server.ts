@@ -1,5 +1,3 @@
-import { MeiliSearch } from "meilisearch";
-import { MEILI_HTTP_ADDR, MEILI_MASTER_KEY } from "$env/static/private";
 import type { PageServerLoad } from "./$types";
 import {
     CATEGORIES,
@@ -9,17 +7,7 @@ import {
     type Point,
     type Year,
 } from "$lib/problem";
-
-const getMeiliSearchInstance = async () => {
-    let client = new MeiliSearch({
-        host: MEILI_HTTP_ADDR,
-        apiKey: MEILI_MASTER_KEY,
-    });
-
-    let instance = client.index("kice_problems");
-
-    return instance;
-};
+import { getMeiliSearchInstance } from "$lib/ms.server";
 
 export const load: PageServerLoad = async ({ url }) => {
     const query = url.searchParams.get("query");

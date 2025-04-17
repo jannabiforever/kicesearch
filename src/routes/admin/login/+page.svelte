@@ -7,12 +7,13 @@
 
 <div class="login-container">
     <form action="/admin/login" method="post">
-        <input type="text" name="username" placeholder="username" />
-        <input type="password" name="password" placeholder="password" />
+        <input type="text" name="username" placeholder="username" required />
+        <input
+            type="password"
+            name="password"
+            placeholder="password"
+            required
+        />
         <button type="submit"> login </button>
     </form>
 </div>
-
-{#if page.data.successful}
-    <p>login successful!</p>
-{/if}
