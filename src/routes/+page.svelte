@@ -3,7 +3,7 @@
         CATEGORIES,
         POINTS,
         YEARS,
-        displayYearMessage,
+        displayYearMessage as fmtYear,
     } from "$lib/problem";
     import { page } from "$app/state";
     import SearchResultDiv from "$lib/SearchResultDiv.svelte";
@@ -27,7 +27,7 @@
                                     type="checkbox"
                                     value={year}
                                 />
-                                {displayYearMessage(year)}
+                                {fmtYear(year)}
                             </label>
                         </li>
                     {/each}

@@ -10,8 +10,6 @@ import {
     type Year,
 } from "$lib/problem";
 
-// import data from "../../pdf/2022_06.json";
-
 const getMeiliSearchInstance = async () => {
     let client = new MeiliSearch({
         host: MEILI_HTTP_ADDR,
@@ -19,10 +17,6 @@ const getMeiliSearchInstance = async () => {
     });
 
     let instance = client.index("kice_problems");
-
-    // initialize.
-    // await instance.updateFilterableAttributes(["point", "year", "category"]);
-    // await instance.addDocuments(data);
 
     return instance;
 };
@@ -53,19 +47,19 @@ export const load: PageServerLoad = async ({ url }) => {
 
 function validateYearString(year: string) {
     if (!YEARS.includes(Number(year) as Year)) {
-        throw Error("Given query year=" + year + " is not valid!");
+        throw Error(`Given query year = ${year} is not valid!`);
     }
 }
 
 function validateCategoryString(category: string) {
     if (!CATEGORIES.includes(category as Category)) {
-        throw Error("Given query category=" + category + " is not valid!");
+        throw Error(`Given query category = ${category} is not valid!`);
     }
 }
 
 function validatePointString(point: string) {
     if (!POINTS.includes(point as Point)) {
-        throw Error("Given query point=" + point + " is not valid!");
+        throw Error(`Given query point = ${point} is not valid!`);
     }
 }
 
@@ -77,21 +71,21 @@ function buildMSFilterString(
     let yearFilter = years
         .map((year) => {
             validateYearString(year);
-            return "year = " + year;
+            return `year = ${year}`;
         })
         .join(" OR ");
     let categoryFilter = categories
         .map((category) => {
             validateCategoryString(category);
-            return "category = " + category;
+            return `category = ${category}`;
         })
-        .join("OR");
+        .join(" OR ");
     let pointFilter = points
         .map((point) => {
             validatePointString(point);
-            return "point = " + point;
+            return `point = ${point}`;
         })
-        .join("OR");
+        .join(" OR ");
 
     return [yearFilter, categoryFilter, pointFilter]
         .filter(Boolean)
