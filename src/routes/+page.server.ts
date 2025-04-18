@@ -1,23 +1,22 @@
 import type { PageServerLoad } from "./$types";
-import {
-    CATEGORIES,
-    POINTS,
-    YEARS,
-    type Category,
-    type Point,
-    type Year,
-} from "$lib/problem";
 import { getMeiliSearchInstance } from "$lib/ms.server";
 
 export const load: PageServerLoad = async ({ url }) => {
     const query = url.searchParams.get("query");
+
     const years = url.searchParams.getAll("year");
+    const months = url.searchParams.getAll("month");
     const categories = url.searchParams.getAll("category");
     const points = url.searchParams.getAll("point");
 
     if (query !== null) {
         let msInstance = await getMeiliSearchInstance();
-        let filterString = buildMSFilterString(years, categories, points);
+        let filterString = buildMSFilters([
+            ["year", years],
+            ["month", months],
+            ["category", categories],
+            ["point", points],
+        ]);
 
         let result = await msInstance.search(query, {
             filter: filterString,
@@ -33,49 +32,22 @@ export const load: PageServerLoad = async ({ url }) => {
     }
 };
 
-function validateYearString(year: string) {
-    if (!YEARS.includes(Number(year) as Year)) {
-        throw Error(`Given query year = ${year} is not valid!`);
-    }
-}
-
-function validateCategoryString(category: string) {
-    if (!CATEGORIES.includes(category as Category)) {
-        throw Error(`Given query category = ${category} is not valid!`);
-    }
-}
-
-function validatePointString(point: string) {
-    if (!POINTS.includes(point as Point)) {
-        throw Error(`Given query point = ${point} is not valid!`);
-    }
-}
-
-function buildMSFilterString(
-    years: string[],
-    categories: string[],
-    points: string[]
-): string {
-    let yearFilter = years
-        .map((year) => {
-            validateYearString(year);
-            return `year = ${year}`;
+function buildMSFilters(filters: [string, string[]][]): string {
+    return filters
+        .map(([index, options]) => {
+            return buildMSFilter(index, options);
         })
-        .join(" OR ");
-    let categoryFilter = categories
-        .map((category) => {
-            validateCategoryString(category);
-            return `category = ${category}`;
-        })
-        .join(" OR ");
-    let pointFilter = points
-        .map((point) => {
-            validatePointString(point);
-            return `point = ${point}`;
-        })
-        .join(" OR ");
-
-    return [yearFilter, categoryFilter, pointFilter]
         .filter(Boolean)
         .join(" AND ");
+}
+
+function buildMSFilter(
+    filterable_index_name: string,
+    options: string[]
+): string {
+    return options
+        .map((option) => {
+            return `${filterable_index_name} = ${option}`;
+        })
+        .join(" OR ");
 }

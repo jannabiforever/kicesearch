@@ -1,4 +1,5 @@
 import type { Actions } from "../$types";
+import { ADMIN_USERNAME, ADMIN_PASSWORD } from "$env/static/private";
 
 export const actions = {
     default: async ({ request, cookies }) => {
@@ -26,5 +27,5 @@ export const actions = {
 
 // TODO: implement sophisticated logic for authenticate credentials.
 const isAuthenticated = (username: string, password: string) => {
-    return username == "asdf" && password == "asdf";
+    return username == ADMIN_USERNAME && password == ADMIN_PASSWORD;
 };

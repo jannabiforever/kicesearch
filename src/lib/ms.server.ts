@@ -11,3 +11,12 @@ export const getMeiliSearchInstance = async () => {
 
     return instance;
 };
+
+export const dumpMeiliSearch = async () => {
+    let client = new MeiliSearch({
+        host: MEILI_HTTP_ADDR,
+        apiKey: MEILI_MASTER_KEY,
+    });
+
+    await client.createDump();
+};

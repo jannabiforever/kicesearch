@@ -2,8 +2,10 @@
     import {
         CATEGORIES,
         POINTS,
-        YEARS,
-        displayYearMessage as fmtYear,
+        KICE_YEARS,
+        displayKiceYear,
+        KICE_MONTHS,
+        displayKiceMonth,
     } from "$lib/problem";
     import { page } from "$app/state";
     import SearchResultDiv from "$lib/SearchResultDiv.svelte";
@@ -17,9 +19,9 @@
         </div>
         <div class="search-options">
             <div class="year-options">
-                <p>출제년도</p>
+                <p>학년도</p>
                 <ul class="year-options-labels">
-                    {#each YEARS as year}
+                    {#each KICE_YEARS as year}
                         <li>
                             <label>
                                 <input
@@ -27,14 +29,31 @@
                                     type="checkbox"
                                     value={year}
                                 />
-                                {fmtYear(year)}
+                                {displayKiceYear(year)}
+                            </label>
+                        </li>
+                    {/each}
+                </ul>
+            </div>
+            <div class="month-options">
+                <p>시험 구분</p>
+                <ul class="month-options-labels">
+                    {#each KICE_MONTHS as month}
+                        <li>
+                            <label>
+                                <input
+                                    name="month"
+                                    type="checkbox"
+                                    value={month}
+                                />
+                                {displayKiceMonth(month)}
                             </label>
                         </li>
                     {/each}
                 </ul>
             </div>
             <div class="category-options">
-                <p>구분</p>
+                <p>문제 구분</p>
                 <ul class="category-options-labels">
                     {#each CATEGORIES as category}
                         <li>
@@ -70,7 +89,7 @@
         </div>
     </form>
 
-    <SearchResultDiv result={page.data.result} />
+    <SearchResultDiv result={page.data["result"]} />
 </section>
 
 <style>
