@@ -1,0 +1,232 @@
+[
+  {
+    "id": "01",
+    "category": "수학1",
+    "body": "2^{sqrt{3}}times2^{2-sqrt{3}}의 값은?"
+  },
+  {
+    "id": "02",
+    "category": "수학2",
+    "body": "함수 f(x)가 f'(x)=3x^2-2x, f(1)=1을 만족시킬 때, f(2)의 값은?"
+  },
+  {
+    "id": "03",
+    "category": "수학1",
+    "body": "pi<theta<3/2pi인 theta에 대하여 tan theta=15/일 때, sin theta+cos theta의 값은?"
+  },
+  {
+    "id": "04",
+    "category": "수학2",
+    "body": "함수 y=f(x)의 그래프가 그림과 같다. lim_{x->0-}f(x) + lim_{x->2+}f(x)의 값은?"
+  },
+  {
+    "id": "05",
+    "category": "수학2",
+    "body": "다항함수 f(x)에 대하여 함수 g(x)를 g(x)=(x^2+3)f(x)라 하자. f(1)=2, f'(1)=1일 때, g'(1)의 값은?"
+  },
+  {
+    "id": "06",
+    "category": "수학2",
+    "body": "곡선 y=3x^2-x와 직선 y=5x로 둘러싸인 부분의 넓이는?"
+  },
+  {
+    "id": "07",
+    "category": "수학1",
+    "body": "첫째항이 2인 등차수열 {a_n}의 첫째항부터 제n항까지의 합을 S_n이라 하자. a_6=2(S_3-S_2)일 때, S_10의 값은?"
+  },
+  {
+    "id": "08",
+    "category": "수학2",
+    "body": "함수 f(x) = cases {-2x+6 & (x<a) ## 2x-a & (x >= a)}에 대하여 함수 {f(x)}^2이 실수 전체의 집합에서 연속이 되도록 하는 모든 상수 a의 값의 합은?"
+  },
+  {
+    "id": "09",
+    "category": "수학1",
+    "body": "수열 {a_n}이 모든 자연수 n에 대하여 a_{n+1}=cases{1/a_n & (n이 홀수인 경우) ## 8a_n & (n이 짝수인 경우)}이고 a_{12}=1/2일 때, a_1+a_4의 값은?"
+  },
+  {
+    "id": "10",
+    "category": "수학1",
+    "body": "n>=2인 자연수 n에 대하여 두 곡선 y=log_{n}x, y=-log_{n}(x+3)+1이 만나는 점의 x좌표가 1보다 크고 2보다 작도록 하는 모든 n의 값의 합은?"
+  },
+  {
+    "id": "11",
+    "category": "수학2",
+    "body": "닫힌구간 [0,1]에서 연속인 함수 f(x)가 f(0)=0, f(1)=1, int_{0}^{1}f(x)dx = 1/6을 만족시킨다. 실수 전체의 집합에서 정의된 함수 g(x)가 다음 조건을 만족시킬 때, int_{-3}^{2}g(x)dx의 값은? (가) g(x)= cases{-f(x+1)+1&(-1<x<0)##f(x)&(0<=x<=1)} (나) 모든 실수 x에 대하여 g(x+2)=g(x)이다."
+  },
+  {
+    "id": "12",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "13",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "14",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "15",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "16",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "17",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "18",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "19",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "20",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "21",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "22",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "h23",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "h24",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "h25",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "h26",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "h27",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "h28",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "h29",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "h30",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "m23",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "m24",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "m25",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "m26",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "m27",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "m28",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "m29",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "m30",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "g23",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "g24",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "g25",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "g26",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "g27",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "g28",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "g29",
+    "category": "",
+    "body": ""
+  },
+  {
+    "id": "g30",
+    "category": "",
+    "body": ""
+  }
+]

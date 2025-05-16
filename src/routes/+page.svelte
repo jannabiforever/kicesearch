@@ -1,11 +1,10 @@
 <script lang="ts">
     import {
         CATEGORIES,
-        POINTS,
-        KICE_YEARS,
-        displayKiceYear,
         KICE_MONTHS,
+        KICE_YEARS,
         displayKiceMonth,
+        displayKiceYear,
     } from "$lib/problem";
     import { page } from "$app/state";
     import SearchResultDiv from "$lib/SearchResultDiv.svelte";
@@ -72,7 +71,7 @@
             <div class="point-options">
                 <p>배점</p>
                 <ul class="point-options-labels">
-                    {#each POINTS as point}
+                    {#each ["2점", "3점", "4점"] as point}
                         <li>
                             <label>
                                 <input

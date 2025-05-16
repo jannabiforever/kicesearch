@@ -6,7 +6,7 @@
     <main>
         <header>
             <h1><a href="/">평가원 수학 문제 검색</a></h1>
-            <p><a href="/admin">어드민 페이지</a></p>
+            <h2><a href="/all-data">모든 데이터 셋</a></h2>
         </header>
         {@render children()}
     </main>
